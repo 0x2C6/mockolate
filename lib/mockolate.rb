@@ -6,7 +6,7 @@ require "mockolate/parameters"
 require "mockolate/parameters/generator"
 
 module Mockolate
-  extend ActiveSupport::Autoload
+  # extend ActiveSupport::Autoload
   
-  autoload :Parameters
+  # autoload :Parameters
 end
