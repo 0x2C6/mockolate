@@ -4,11 +4,12 @@ require "mockolate/parameters/attributes/macros"
 
 class Mockolate::Parameters
   module Attributes
-    def self.included(base)
-      base.include Mockolate::Parameters::Attributes::Macros
-    end
+    include Mockolate::Parameters::Attributes::Macros
+    # def self.included(base)
+    #   # base.include Mockolate::Parameters::Attributes::Macros
+    # end
 
-    module ClassMethods      
-    end
+    # module ClassMethods      
+    # end
   end  
 end

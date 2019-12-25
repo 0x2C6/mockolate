@@ -2,16 +2,13 @@
 
 module Mockolate::Parameters::Attributes
   module Types
-    def self.included(base)
-      base.extend ClassMethods
+    def string(name)
+      {name.to_sym => {value: '', type: :string} }
     end
 
-    module ClassMethods
-      def string(name)
-      end
-
-      def integer(name)
-      end
+    def integer(name)
+      {name.to_sym => {value: 0, type: :integer}}
     end
+  
   end  
 end

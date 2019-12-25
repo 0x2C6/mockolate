@@ -9,11 +9,20 @@ class Mockolate::Parameters
     end
     
     module ClassInitializers
+      # Function runs after a class inherited from Mockolate::Parameters
+      # @params [Class] class to override
       def initialize!(base)
         base.class_eval do
-          class_variable_set :@@_public_attributes, []
+          # Included modules
+          include Mockolate::Parameters::Attributes::Macros
+          # include Mockolate::Parameters::Generator
+          # include Mockolate::Parameters::Attributes
+
+          # class variables and attributes
+          class_variable_set :@@_public_attributes, {}
         end
       end
     end
+  
   end  
 end
