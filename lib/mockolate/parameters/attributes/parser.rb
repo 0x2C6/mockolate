@@ -14,13 +14,14 @@ module Mockolate::Parameters::Attributes
     private
     def _parse_attributes_from_array(attrs) 
       attrs.map do |attr|
-        # string attr && next if attr.kind_of? Symbol
+        _parse_attribute_from_symbol(attr)
       end
     end
 
-    def _parse_attribute_from_symbol(sym, &block)
-      # hash = sym
-      class_variable_get(:@@_public_attributes).merge!(yield) if block_given? 
+    def _parse_attribute_from_symbol(sym, type = :string, &block)
+      return yield if block_given? 
+
+      class_variable_get(:@@_public_attributes).merge!({sym => method(type).call(sym)})
     end
 
     def _parse_attribute_from_hash(obj)
