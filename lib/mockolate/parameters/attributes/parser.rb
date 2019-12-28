@@ -7,7 +7,7 @@ module Mockolate::Parameters::Attributes
     include Mockolate::Parameters::Attributes::Types
     
     def parse!(obj, &block)
-      return _parse_attribute_from_symbol(obj, &block) if obj.kind_of? Symbol
+      return _parse_nested_attribute_from_symbol(obj, &block) if obj.kind_of? Symbol
       return _parse_attributes_from_array(obj) if obj.kind_of? Array
     end
 
@@ -19,9 +19,11 @@ module Mockolate::Parameters::Attributes
     end
 
     def _parse_attribute_from_symbol(sym, type = :string, &block)
-      return yield if block_given? 
+      class_variable_get(:@@_public_attributes)[sym] = method(type).call(sym)
+    end
 
-      class_variable_get(:@@_public_attributes).merge!({sym => method(type).call(sym)})
+    def _parse_nested_attribute_from_symbol(sym, &block)
+      class_variable_get(:@@_public_attributes)[sym] = nested_type_hander(&block)
     end
 
     def _parse_attribute_from_hash(obj)

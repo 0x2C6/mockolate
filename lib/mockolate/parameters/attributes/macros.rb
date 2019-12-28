@@ -16,11 +16,12 @@ module Mockolate::Parameters::Attributes
       # @param attr [String] key of attribute
       # @yield block
       def attribute(attr, &block)
+
         parse!(attr, &block)
         # class_variable_get(:@@_public_attributes).merge
       end
 
-      # Handles multiple attributes
+      # Handles multiple attributes <Object: type='string|integer|hash' value: '', default_value: 'st|2|{}'>
       # @param attrs [Array<String>] key of attribute
       def attributes(*attrs)
         parse!(attrs)

@@ -20,6 +20,12 @@ class Mockolate::Parameters
 
           # class variables and attributes
           class_variable_set :@@_public_attributes, {}
+          
+          class << self
+            def params
+              class_variable_get :@@_public_attributes
+            end
+          end
         end
       end
     end
