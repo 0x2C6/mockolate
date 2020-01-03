@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require "mockolate/version"
-require "mockolate/parameters"
-require "mockolate/parameters/generator"
+require 'faker'
+require 'mockolate/version'
+require 'mockolate/types'
+require 'mockolate/register'
+require 'mockolate/request'
+require 'mockolate/request/parser'
+require 'mockolate/initializers'
 
 module Mockolate
-  # extend ActiveSupport::Autoload
-  
-  # autoload :Parameters
 end
