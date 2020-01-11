@@ -2,6 +2,7 @@
 
 require 'faker'
 require 'mockolate/version'
+require 'mockolate/errors'
 require 'mockolate/types'
 require 'mockolate/register'
 require 'mockolate/request'

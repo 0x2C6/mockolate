@@ -27,7 +27,7 @@ class Mockolate::Request
     end
 
     def hash(*args, &block)
-      raise 'Error' unless block_given?
+      raise Mockolate::Errors::MissingHashBlockError unless block_given?
       method_missing(:hash, *args, &block)
     end
 

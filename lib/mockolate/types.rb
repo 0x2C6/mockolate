@@ -28,7 +28,7 @@ class Mockolate::Types
         end
 
         def parse
-          raise "#{self.class}#parse is missing"
+          return name => value
         end
 
         def has_children?

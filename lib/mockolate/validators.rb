@@ -4,7 +4,7 @@ module Mockolate::Validators
   class << self
     def check_value_given?(obj)
       return if _check_has_default_value?(obj) || _check_both_given?(obj)
-      raise 'Default value or all Faker options should be given'
+      raise Mockolate::Errors::MissingValueError, 'Default value or all Faker options should be given'
     end
 
     def check_faker(obj)

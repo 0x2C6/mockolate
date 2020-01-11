@@ -6,7 +6,7 @@ class Mockolate::Types::Integer < Mockolate::Types
   # options:  Options of the key specified in params block
   # value:    Returns default value if specified, or fetchs data from faker
 
-  def parse
-    return name => value
-  end
+  # def parse
+  #   super
+  # end
 end
