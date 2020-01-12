@@ -9,6 +9,7 @@ class Mockolate::Types::Hash < Mockolate::Types
   # _parse_child    Returns array with parsed children
   
   def parse
-    return name => {}.merge(*_parse_child)
+    return name => {}.merge(*_parse_child) if name
+    {}.merge(*_parse_child)
   end
 end
