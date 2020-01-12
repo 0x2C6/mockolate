@@ -44,6 +44,12 @@ class Mockolate::Types
           options[:value] || _get_from_faker!
         end
 
+        def _parse_child
+          children.flatten.map do |child|
+            child.parse
+          end
+        end
+
         def _cast
           class_name = self.class.name.split('::')
 
@@ -63,4 +69,5 @@ class Mockolate::Types
   require 'mockolate/types/string'
   require 'mockolate/types/integer'
   require 'mockolate/types/hash'
+  require 'mockolate/types/array'
 end
