@@ -2,13 +2,33 @@
 
 class Mockolate::Request::Parser
   attr_reader :_attr_arr
+  attr_reader :_options
+  attr_reader :_export_key
   
-  def initialize(attr_arr)
+  def initialize(attr_arr, options = {})
     @_attr_arr = attr_arr
+    @_export_key  = options[:export_with]
   end
 
   def parse
-    #TODO: remove loop complexity
+    return _parse_to_hash if _export_key
+    _parse_to_array
+  end
+
+  private
+  def _parse_to_hash
+    export_hash = {}
+    _attr_arr.each do |attr|
+      hash = {}
+      attr.each do |t|
+        hash.merge! t.parse
+      end  
+      export_hash[hash[:email]] = hash
+    end
+    return export_hash
+  end
+
+  def _parse_to_array
     _attr_arr.map do |attr|
       _hash = Hash.new
       

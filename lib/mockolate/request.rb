@@ -2,20 +2,28 @@
 
 class Mockolate::Request
   @@public_attributes = []
+  @@payload_options   = {}
 
-  def self.payload(&block)
+  def self.payload(options = {}, &block)
+    @@payload_options = options
     dsl = DSL.new
     dsl.instance_exec(&block)
-    @@public_attributes = [dsl.attributes]
+    @@public_attributes << dsl.attributes
   end
 
   def self.params
     @@public_attributes
   end
 
-  def self.generate!(count = nil)
+  def self.generate_array!(count = nil)
     attr_arr = @@public_attributes * (count || 1)
     parser = Parser.new(attr_arr)
+    parser.parse
+  end
+
+  def self.generate_hash!(count = nil)
+    attr_arr = @@public_attributes * (count || 1)
+    parser = Parser.new(attr_arr, @@payload_options)
     parser.parse
   end
 
