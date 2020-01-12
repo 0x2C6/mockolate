@@ -1,31 +1,37 @@
 RSpec.describe Mockolate do
   context "parameter generator" do
     it 'should generate hash with given attributes' do
-      class AuthorRequestParams < Mockolate::Parameters
-        attributes :fullname, :email, id: :integer
-        attribute  :books do
-          string  :title
-          string  :author
-          integer :published
+      class AuthorRequestParams < Mockolate::Request
+        payload do
+          string    :firstname,    value: 'John'
+          string    :lastname,     value: 'Doe'
+          integer   :age,          value: 21
+          array     :books do 
+            hash do
+              string    :name,      value: 'Tehlikeli Oyunlar'
+              string    :author,    value: 'Oguz Atay'
+              integer   :published, value: 1973
+            end
+            hash do
+              string    :name,      value: '1984'
+              string    :author,    value: 'George Orwell'
+              integer   :published, value: 1949
+            end
+          end
         end
       end
       
-      expect(
-        AuthorRequestParams.generate do
-          fullname 'Farhad Eyvazli'
-          books(size: 2) do 
-            title '1986', 'Tehlikeli oyunlar'
-            author 'George Orwel', 'Oguz Atay'
-          end
-        end
-        ).to eq({
-        fullname: 'Farhad Eyvazli',
-        email:    'dummy@gmail.com',
-        books: [
-          {title: '1986', author: 'George Orwel', published: 1980},
-          {title: 'Tehlikeli oyunlar', author: 'Oguz Atay', published: 1990}
+      # binding.pry
+      
+      expect(AuthorRequestParams.generate!).to eq([{
+        :firstname => 'John',
+        :lastname  => 'Doe',
+        :age       => 21,
+        :books     => [
+          {:author => 'Oguz Atay', :name => 'Tehlikeli Oyunlar', :published => 1973},
+          {:author=>"George Orwell", :name => '1984', :published=>1949}
         ]
-      })
+      }])
     end
   end  
 end
