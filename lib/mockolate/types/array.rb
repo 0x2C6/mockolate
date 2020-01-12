@@ -9,6 +9,6 @@ class Mockolate::Types::Array < Mockolate::Types
   # _parse_child    Returns array with parsed children
 
   def parse
-    name => [].push(*_parse_child)
+    return name => [].push(*_parse_child)
   end
 end
