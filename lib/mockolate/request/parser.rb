@@ -2,7 +2,6 @@
 
 class Mockolate::Request::Parser
   attr_reader :_attr_arr
-  attr_reader :_options
   attr_reader :_export_key
   
   def initialize(attr_arr, options = {})
@@ -23,7 +22,7 @@ class Mockolate::Request::Parser
       attr.each do |t|
         hash.merge! t.parse
       end  
-      export_hash[hash[:email]] = hash
+      export_hash[hash[_export_key]] = hash
     end
     return export_hash
   end
