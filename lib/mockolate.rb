@@ -6,6 +6,7 @@ require 'mockolate/errors'
 require 'mockolate/types'
 require 'mockolate/register'
 require 'mockolate/request'
+require 'mockolate/response'
 require 'mockolate/request/parser'
 require 'mockolate/initializers'
 
