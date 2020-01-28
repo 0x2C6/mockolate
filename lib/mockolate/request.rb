@@ -20,14 +20,14 @@ class Mockolate::Request
     @@public_attributes
   end
 
-  def self.generate_array!(count = nil)
-    attr_arr = @@payloads # * (count || 1)
+  def generate_array!(count = nil)
+    attr_arr = @@payloads
     parser = Parser.new(attr_arr)
     parser.parse
   end
 
-  def self.generate_hash!(count = nil)
-    attr_arr = @@payloads # * (count || 1)
+  def generate_hash!(count = nil)
+    attr_arr = @@payloads
     parser = Parser.new(attr_arr, @@payload_options)
     parser.parse
   end
