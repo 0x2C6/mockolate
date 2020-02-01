@@ -34,7 +34,7 @@ Create hash object using Request class and its dsl
 
 ```ruby
 class UserRequestParams < Mockolate::Request
-  payload do
+  payload export_with: :firstname do
     string    :firstname,    fake_from: 'Name', key: 'first_name'
     string    :lastname,     fake_from: 'Name', key: 'last_name'
     integer   :age,          value: 21
@@ -59,7 +59,7 @@ You can even generate dynamic data by using `fake_from` and `key` options which 
 If you planning to access the hash with key pass `export_with` option to payload
 For results use `generate_array!` or `generate_hash!` (which returns nested hash with export key) instance methods.
 
-`UserRequestParams.new.generate_array!`
+`UserRequestParams.new.generate_hash!`
 
 Consume data from remote endpoint created data by `Mockolate::Request`
 
